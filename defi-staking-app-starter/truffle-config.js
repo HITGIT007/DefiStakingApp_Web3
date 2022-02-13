@@ -15,18 +15,18 @@ module.exports = {
         },
 
     },
-    //Contracts Directory for info to truffle
-    contracts_directory: './src/contracts/',
-    //We also want to build our directories for our JSON files
-    comtracts_build_directory: './src/truffle_abis/',
-    //solidity compiler setup
+    // Contracts Directory for info to truffle
+    // contracts_directory: './src/contracts/',
+    // We also want to build our directories for our JSON files
+    // contracts_build_directory: './src/truffle_abis/',
+    // solidity compiler setup
     compilers:{
         solc:{ 
-            version:'^0.5.0',//anything above 0.5.0
-            optimizer: { 
-                enabled: true,
-                runs: 200
-            },
+            version:'^0.8.0',//anything above 0.8.0
+            // optimizer: { 
+            //     enabled: true,
+            //     runs: 200
+            // },
         }
     }
 }
