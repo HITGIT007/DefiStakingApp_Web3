@@ -17,9 +17,39 @@ contract DecentralBank {
     Tether public tether;
     RWD public rwd;
 
+    //array of address opf stakers
+    address[] public stakers;
+
+
+    //key Store value setup for address
+    mapping (address => uint) public stakingBalance;
+    mapping (address => bool) public hasStaked;
+    mapping (address => bool) public isStaking;
+  
     constructor(RWD _rwd, Tether _tether) public{
         rwd = _rwd;
         tether = _tether;
     }//We are doing this because it is important to wire the smart contracts with each other
 
+
+    //This is a staking function 
+    function depositTokens(uint _amount) public {
+        
+        //Require staking amount to be greater than 0
+        require(_amount> 0, 'amount cannot be 0');
+        //Transfer tether tokens to this contract address for staking
+        tether.transferFrom(msg.sender, address(this), _amount);
+
+        //Update and keep track of staking balance as they change
+        stakingBalance[msg.sender] = stakingBalance[msg.sender] + _amount;
+
+        if(!hasStaked[msg.sender]){
+            stakers.push(msg.sender);
+        }
+
+        //Update Staking balance
+        isStaking[msg.sender] = true;
+        hasStaked[msg.sender] = true;
+    }
+//Now to check if they have staked or staking 
 }

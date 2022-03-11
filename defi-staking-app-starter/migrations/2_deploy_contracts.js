@@ -25,8 +25,8 @@ module.exports = async function(deployer, network, accounts) {
    //For our ease we have considered the first address to be our digital bank address 
    //And second address the address of investor by default
    //this is because we want to remove all that sign in and firebase authentication
-   //transfer 1 eth
-   await tether.transfer(accounts[1],'1000000000000000000')//2nd account so [1] and then amount
+   //transfer 100 eth
+   await tether.transfer(accounts[1],'100000000000000000000')//2nd account so [1] and then amount
 
 
 
