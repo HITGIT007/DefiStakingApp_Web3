@@ -29,6 +29,7 @@ contract DecentralBank {
     constructor(RWD _rwd, Tether _tether) public{
         rwd = _rwd;
         tether = _tether;
+        owner = msg.sender;
     }//We are doing this because it is important to wire the smart contracts with each other
 
 
@@ -36,7 +37,7 @@ contract DecentralBank {
     function depositTokens(uint _amount) public {
         
         //Require staking amount to be greater than 0
-        require(_amount> 0, 'amount cannot be 0');
+        require(_amount > 0, 'amount cannot be 0');
         //Transfer tether tokens to this contract address for staking
         tether.transferFrom(msg.sender, address(this), _amount);
 
@@ -50,6 +51,52 @@ contract DecentralBank {
         //Update Staking balance
         isStaking[msg.sender] = true;
         hasStaked[msg.sender] = true;
+        //Now to check if they have staked or staking 
     }
-//Now to check if they have staked or staking 
+
+    //unstake tokens
+    function unstakeTokens() public{
+        
+        //The amount of balance is going to be the balance of the person who is calling the contract
+        uint balance = stakingBalance[msg.sender];
+        
+        //require the amount to be greater than zero
+        require(balance > 0, "staking balance can't be less than 0");
+
+        //transfer the tokens to the specified contract address from our bank
+        tether.transfer(msg.sender,balance);
+
+        //reset staking balance
+        stakingBalance[msg.sender] = 0;
+
+        //Update Staking Balance
+        isStaking[msg.sender] = false;
+    }
+
+
+
+    //issue rewarrds
+    function issueTokens() public {
+        //require the owner to issue tokens only
+        require(msg.sender == owner, 'caller must be owner');
+
+        //We are iterating through our stakers and then we want to be rewarding the stakers that are actually staking 
+        for(uint i=0; i<stakers.length; i++){
+            //create recipient as stakers
+            address recipient = stakers[i];
+
+            //reward balance set to stakers staking balance divided by 9
+            uint balance = stakingBalance[recipient] / 9;
+
+
+            if(balance>0){
+                //if balance > 0 we reward them
+                rwd.transfer(recipient, balance);
+            }
+
+             
+        }
+         
+    }
+
 }
