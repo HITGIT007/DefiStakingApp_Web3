@@ -12,20 +12,22 @@ class Navbar extends Component {
           className="navbar-brand col-sm-3 col-md-2 mr-2 mr-0"
           style={{ color: "white" }}
         >
-           &nbsp;
+          &nbsp;
           <img
             src={bank}
             width="50"
             height="30"
             className="d-inline-block align-top"
             alt="bank image"
-          />&nbsp;
-          DAPP Yield Farming(Decentralized Banking)
+          />
+          &nbsp; DAPP Yield Farming(Decentralized Banking)
         </a>
 
         <ul className="navbar-nav px-3">
           <li className="text-nowrap d-none nav-item d-sm-none d-sm-block">
-            <small style={{ color: "white" }}>ACCOUNT NUMBER:{this.props.account}</small>
+            <small style={{ color: "white" }}>
+              ACCOUNT NUMBER:{this.props.account}
+            </small>
           </li>
         </ul>
       </nav>

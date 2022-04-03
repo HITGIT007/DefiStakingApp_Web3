@@ -16,9 +16,9 @@ module.exports = {
 
     },
     // Contracts Directory for info to truffle
-    // contracts_directory: './src/contracts/',
+     contracts_directory: './src/contracts/',
     // We also want to build our directories for our JSON files
-    // contracts_build_directory: './src/truffle_abis/',
+    contracts_build_directory: './src/build/contracts/',
     // solidity compiler setup
     compilers:{
         solc:{ 

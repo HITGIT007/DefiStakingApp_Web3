@@ -1,7 +1,6 @@
-
 // pragma solidity ^0.8.0;
 // //Below is the code for smart contract for mock tether
-// /* Setting up object as contract 
+// /* Setting up object as contract
 // Then sending it to the tether
 // Setting and running our metadata and the important information */
 
@@ -12,21 +11,20 @@
 //     string public symbol = "USDT";
 //     uint256 public totalSupply = 1000000000000000000000000; //1 million tokens
 //     uint8 public decimals = 18;
-//     //After emitting events you can't read them in the past only for entitites outside of the blockchain - not stored as memory 
+//     //After emitting events you can't read them in the past only for entitites outside of the blockchain - not stored as memory
 //     //events have lower gas cost than storage
-    
 
 //     //setting up transfer and approval event and adresses
 //     event Transfer(
-//         address indexed _from, 
-//         address indexed _to, 
+//         address indexed _from,
+//         address indexed _to,
 //         uint _value
 //         );
 //     //These addresses are going to be indexed, because it essentially allows us to filter
-    
+
 //     event Approval(
-//         address indexed _owner, 
-//         address indexed _spender, 
+//         address indexed _owner,
+//         address indexed _spender,
 //         uint _value
 //         );
 //     //Approval always has to come from the owner
@@ -38,7 +36,7 @@
 
 //     //map into our mapping
 //     mapping(address =>mapping(address => uint256)) public allowance;
-//     //here we just have an mapping that we are sending an address to and then of those addresses, we are doing the same thing  
+//     //here we just have an mapping that we are sending an address to and then of those addresses, we are doing the same thing
 //     //We are mapping and we are providing key store value for each address which will be set to our allowance
 //     //This is how we are going to be able to keep track with iterations for allowance
 
@@ -50,7 +48,7 @@
 
 //     //Logic for the function Transfer
 //     function transfer(address _to, uint256 _value) public returns (bool success)
-//     {   
+//     {
 //         //transfer amount less than total amount of Tether
 //         require(balanceOf[msg.sender]>= _value);
 
@@ -59,8 +57,7 @@
 
 //         //balance of receiver is going to increase
 //         balanceOf[_to] = balanceOf[_to] + _value;
-        
-        
+
 //         emit Transfer(msg.sender, _to, _value);
 //         return true;
 
@@ -75,27 +72,26 @@
 //         return true;
 //     }
 
-
 //     function transferFrom(address _from, address _to, uint256 _value) public returns (bool success)
-//     {   
-        
+//     {
+
 //         require(_value <=  balanceOf[_from]);
 
-//         //We want to check to see if it is that we want to check to see that the value that we have here is 
+//         //We want to check to see if it is that we want to check to see that the value that we have here is
 //         //less than or equal to the value of the balance of the address
 //         require(_value <=  allowance[_from][msg.sender]);
 //         //add the balance for transaction
 //         balanceOf[_to] = balanceOf[_to] + _value;
-        
+
 //         //subtract the balance for transferFrom
 //         balanceOf[_from] = balanceOf[_from] - _value;
-        
+
 //         //allowance functionality
 //         allowance[msg.sender][_from] -= _value;
-//         //allowance comes from the message sender and the address is from is going to be equal to the 
+//         //allowance comes from the message sender and the address is from is going to be equal to the
 //         //allowance of the message sender from minus the value
 //         //The callers allowance from sender is reduced from the amount
-        
+
 //         emit Transfer(_from, _to, _value);
 //         return true;
 
@@ -112,11 +108,10 @@ import "@openzeppelin/contracts/access/Ownable.sol";
 
 contract Tether is ERC20, Ownable {
     constructor() ERC20("Tether", "USDT") {
-        _mint(msg.sender, 1000000 * 10 ** decimals());
+        _mint(msg.sender, 1000000 * 10**decimals());
     }
 
     function mint(address to, uint256 amount) public onlyOwner {
         _mint(to, amount);
     }
-
 }
